@@ -20,27 +20,25 @@ val networkModule = module {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level =
             HttpLoggingInterceptor.Level.BODY
+
         return@single loggingInterceptor
     }
 
     single {
         val preferenceHelper: PreferenceHelper = get<PreferenceHelper>()
         val builder = OkHttpClient.Builder()
-            .addInterceptor(object : Interceptor {
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    var request = chain.request()
+            .addInterceptor(Interceptor { chain ->
+                var request = chain.request()
 
-                    request = request.newBuilder()
-                        .addHeader(
-                            Constant.AUTH_KEY,
-                            preferenceHelper.getString(Constant.AUTH_KEY, "")!!
-                        )
-                        .addHeader("Accept", "application/json")
-                        .build()
+                request = request.newBuilder()
+                    .addHeader(
+                        Constant.AUTH_KEY,
+                        preferenceHelper.getString(Constant.AUTH_KEY, "")!!
+                    )
+                    .addHeader("Accept", "application/json")
+                    .build()
 
-                    return chain.proceed(request)
-                }
-
+                chain.proceed(request)
             })
             .addInterceptor(get<HttpLoggingInterceptor>())
             .readTimeout(0, TimeUnit.MILLISECONDS)

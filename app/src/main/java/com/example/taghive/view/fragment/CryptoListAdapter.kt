@@ -6,34 +6,36 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taghive.R
+import com.example.taghive.databinding.CyptoItemLayoutBinding
 import com.example.taghive.domain.model.CryptoDataClassItem
 
 class CryptoListAdapter(var dataList: List<CryptoDataClassItem>, var listner: ItemClickListener) :
     RecyclerView.Adapter<CryptoListAdapter.CryptoListViewHolder>() {
-
-
-    class CryptoListViewHolder(itemView: View, var listner: ItemClickListener) :
-        RecyclerView.ViewHolder(itemView) {
-
-//        fun bind(data: CryptoDataClassItem, listner: ItemClickListener) {
-            val titleTextView: TextView = itemView.findViewById(R.id.txt_crypto_symbol)
-//        }
-
-    }
+    private lateinit var binding: CyptoItemLayoutBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoListViewHolder {
-        return CryptoListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.cypto_item_layout, parent, false),
-            listner
-        )
+        val layoutInflater = LayoutInflater.from(parent.context)
+        binding = CyptoItemLayoutBinding.inflate(layoutInflater, parent, false)
+        return CryptoListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CryptoListViewHolder, position: Int) {
         val data = dataList[position]
-        holder.titleTextView.text = data.symbol
+        holder.bind(data, listner)
     }
 
     override fun getItemCount(): Int {
         return dataList?.size ?: 0
+    }
+
+    class CryptoListViewHolder(
+        var dataBinding: CyptoItemLayoutBinding
+    ) :
+        RecyclerView.ViewHolder(dataBinding.root) {
+
+        fun bind(data: CryptoDataClassItem, listner: ItemClickListener) {
+            dataBinding.txtCryptoSymbol.text = data.symbol
+        }
+
     }
 }
