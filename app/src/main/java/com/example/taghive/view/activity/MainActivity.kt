@@ -17,12 +17,18 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
+        /**
+         * adding first fragment to activity
+         */
         val fragment = AllCryptoFragment()
         addFragment(layout_container.id, fragment)
 
     }
 
+
+    /**
+     * Here we are handling back-button action
+     */
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(layout_container.id)
         if (fragment is AllCryptoFragment) {

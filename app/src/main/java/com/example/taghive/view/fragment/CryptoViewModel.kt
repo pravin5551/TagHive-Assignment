@@ -10,7 +10,8 @@ class CryptoViewModel : BaseViewModel() {
     private val cryptoDataList: MutableLiveData<CryptoDataClass> = MutableLiveData()
     fun getCryptoDatResponse() = cryptoDataList
 
-
+    //Calling the List Of cryptos , and after observing data on response of failure and success showing data to user
+    //It;s is just observing stream of Live data from server
     fun listOfCryptos() {
         loading.postValue(true)
         disposable = repository.getListOfCryptos()

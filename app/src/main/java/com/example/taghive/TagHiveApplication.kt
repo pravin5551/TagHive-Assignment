@@ -10,6 +10,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.core.context.startKoin
 
+/**
+ * This is base application of all classes
+ */
 class TagHiveApplication:Application(), Application.ActivityLifecycleCallbacks {
 
     override fun onCreate() {

@@ -1,7 +1,11 @@
 package com.example.taghive.view.fragment
 
+
 interface ItemClickListener {
+
+    //Interface to send data from one fragment to another
     fun onCryptoListClicked(
+
         name: String,
         baseAsset: String,
         quoteAsset: String,
@@ -12,5 +16,5 @@ interface ItemClickListener {
         volume: String,
         bidPrice: String,
         askPrice: String,
-        )
+    )
 }

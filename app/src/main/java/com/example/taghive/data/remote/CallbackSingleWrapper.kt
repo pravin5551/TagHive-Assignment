@@ -8,6 +8,9 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 
+/**
+ * This is network layer of project where all types of network handling's are handled
+ */
 abstract class CallbackSingleWrapper<R> : DisposableObserver<R>() {
     protected abstract fun onApiSuccess(result: R)
     protected abstract fun onApiFailure(error: String)

@@ -2,7 +2,6 @@ package com.example.taghive.data.di
 
 import com.example.taghive.BuildConfig
 import com.example.taghive.data.Constant
-import com.example.taghive.data.local.PreferenceHelper
 import com.example.taghive.data.remote.TagHiveApi
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -14,7 +13,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
+/**
+ * This is an network module where singleton object of retrofit and interceptor is created
+ */
 val networkModule = module {
     single {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -25,7 +26,7 @@ val networkModule = module {
     }
 
     single {
-        val preferenceHelper: PreferenceHelper = get<PreferenceHelper>()
+
         val builder = OkHttpClient.Builder()
             .addInterceptor(Interceptor { chain ->
                 var request = chain.request()
@@ -33,7 +34,7 @@ val networkModule = module {
                 request = request.newBuilder()
                     .addHeader(
                         Constant.AUTH_KEY,
-                        preferenceHelper.getString(Constant.AUTH_KEY, "")!!
+                        Constant.AUTH_KEY,
                     )
                     .addHeader("Accept", "application/json")
                     .build()

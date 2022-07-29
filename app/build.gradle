@@ -21,12 +21,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // buildConfigField "String", "BASE_URL", "\"https://hlfbe.perennialsys.com/\"" //QA server
+        // Base URl of tagHive is here
         buildConfigField "String", "BASE_URL", "\"https://api.wazirx.com/\"" //UAT server
-        //buildConfigField "String", "BASE_URL", "\"https://hlfdev.perennialsys.com/\"" // Dev server
-        // buildConfigField "String", "BASE_URL", "\"http://1fdb-3-7-211-5.ngrok.io\"" //dev testing server
-        // buildConfigField "String", "BASE_URL", "\"http://13.214.100.39:3000/\"" //cug server
-//        buildConfigField "String", "BASE_URL", "\"https://hlf-fastpay.nium.com/\""//production server
         buildConfigField "boolean", "SHOW_LOGS", "true"
 
     }

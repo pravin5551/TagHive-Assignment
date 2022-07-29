@@ -33,7 +33,7 @@ class DetailedCryptoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+//Progress dialogue
         progressDialog = KProgressHUD.create(requireActivity())
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setLabel(getString(R.string.loading))
@@ -43,6 +43,8 @@ class DetailedCryptoFragment : Fragment() {
         binding = FragmentDetailedCryptoBinding.inflate(layoutInflater, container, false)
         binding.toolbar.imgBack.visibility = View.VISIBLE
         binding.toolbar.txtCenter.visibility = View.VISIBLE
+
+        //getting all the Arguments from AllCryptoFragments
         cryptoName = arguments?.getString("name").toString()
         baseAsset = arguments?.getString("baseAsset").toString()
         quoteAsset = arguments?.getString("quoteAsset").toString()

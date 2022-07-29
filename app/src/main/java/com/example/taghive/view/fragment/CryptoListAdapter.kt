@@ -35,6 +35,8 @@ class CryptoListAdapter(var dataList: List<CryptoDataClassItem>, var listner: It
 
         fun bind(data: CryptoDataClassItem, listner: ItemClickListener) {
             dataBinding.txtCryptoSymbol.text = data.symbol
+
+            //passing the bundle to another fragment onclick
             dataBinding.cryptoCard.setOnClickListener {
                 listner.onCryptoListClicked(
                     name = data.symbol.toString(),

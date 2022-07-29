@@ -24,6 +24,8 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //This is to show progressDialog until the response is fetched
         progressDialog = KProgressHUD.create(requireActivity())
             .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
             .setLabel(getString(R.string.loading))
@@ -32,8 +34,14 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
             .setDimAmount(0.5f)
         binding = FragmentAllCryptoBinding.inflate(layoutInflater, container, false)
 
+
+        //recyclerview initialization
         setRecyclerView()
+
+        //calling the list of crypto api
         cryptoViewModel.listOfCryptos()
+
+        //Observing data from server
         cryptoViewModel.getCryptoDatResponse().observe(viewLifecycleOwner) {
             cryptoList.clear()
             cryptoList.addAll(it)
@@ -42,6 +50,8 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
             //Notifying the adapter here
             cryptoAdapter.notifyDataSetChanged()
         }
+
+        //Showing and hiding loader
         cryptoViewModel.getloading().observe(viewLifecycleOwner) {
             if (it) {
                 progressDialog.show()
@@ -52,6 +62,8 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
         return binding.root
     }
 
+
+    //Layout manager setup
     private fun setRecyclerView() {
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -60,7 +72,7 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
         binding.idTotalCrypto.adapter = cryptoAdapter
     }
 
-
+    //passing the bundle to another fragment onclick
     override fun onCryptoListClicked(
         name: String,
         baseAsset: String,

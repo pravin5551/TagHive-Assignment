@@ -5,6 +5,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+
+/**
+ * This are some extensions to reuse in project
+ */
 fun FragmentActivity.replaceFragment(contanerId: Int, fragment: Fragment) {
     val manager = supportFragmentManager
     val transaction = manager.beginTransaction()
