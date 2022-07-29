@@ -25,7 +25,7 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(layout_container.id)
-        if (fragment is AllCryptoFragment || fragment is DetailedCryptoFragment) {
+        if (fragment is AllCryptoFragment) {
             finish()
         } else {
             if (supportFragmentManager.backStackEntryCount > 1) {

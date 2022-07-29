@@ -17,7 +17,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/constraint_wallet_container"
+        android:id="@+id/crypto_card"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"

@@ -7,15 +7,15 @@ import com.example.taghive.domain.model.CryptoDataClassItem
 import com.example.taghive.view.base.BaseViewModel
 
 class CryptoViewModel : BaseViewModel() {
-    private val cryptoDataList: MutableLiveData<CryptoDataClassItem> = MutableLiveData()
+    private val cryptoDataList: MutableLiveData<CryptoDataClass> = MutableLiveData()
     fun getCryptoDatResponse() = cryptoDataList
 
 
     fun listOfCryptos() {
         loading.postValue(true)
         disposable = repository.getListOfCryptos()
-            .subscribeWith(object : CallbackSingleWrapper<CryptoDataClassItem>() {
-                override fun onApiSuccess(result: CryptoDataClassItem) {
+            .subscribeWith(object : CallbackSingleWrapper<CryptoDataClass>() {
+                override fun onApiSuccess(result: CryptoDataClass) {
                     cryptoDataList.postValue(result)
                     loading.postValue(false)
                 }

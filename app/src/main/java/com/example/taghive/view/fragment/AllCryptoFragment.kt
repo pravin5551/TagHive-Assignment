@@ -10,6 +10,7 @@ import com.example.taghive.R
 import com.example.taghive.databinding.FragmentAllCryptoBinding
 import com.example.taghive.domain.model.CryptoDataClassItem
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 
 class AllCryptoFragment : Fragment(), ItemClickListener {
@@ -35,13 +36,19 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
         cryptoViewModel.listOfCryptos()
         cryptoViewModel.getCryptoDatResponse().observe(viewLifecycleOwner) {
             cryptoList.clear()
-            cryptoList.addAll(listOf(it))
+            cryptoList.addAll(it)
 
 
             //Notifying the adapter here
             cryptoAdapter.notifyDataSetChanged()
         }
-        // Inflate the layout for this fragment
+        cryptoViewModel.getloading().observe(viewLifecycleOwner) {
+            if (it) {
+                progressDialog.show()
+            } else {
+                progressDialog.dismiss()
+            }
+        }
         return binding.root
     }
 
@@ -53,8 +60,40 @@ class AllCryptoFragment : Fragment(), ItemClickListener {
         binding.idTotalCrypto.adapter = cryptoAdapter
     }
 
-    override fun onCryptoListClicked(name: String) {
-        TODO("Not yet implemented")
+
+    override fun onCryptoListClicked(
+        name: String,
+        baseAsset: String,
+        quoteAsset: String,
+        openPrice: String,
+        lowPrice: String,
+        highPrice: String,
+        lastPrice: String,
+        volume: String,
+        bidPrice: String,
+        askPrice: String,
+    ) {
+        requireActivity().run {
+            val fragment = DetailedCryptoFragment()
+            val bundle = Bundle()
+            bundle.putString("name", name)
+            bundle.putString("baseAsset", baseAsset)
+            bundle.putString("quoteAsset", quoteAsset)
+            bundle.putString("openPrice", openPrice)
+            bundle.putString("lowPrice", lowPrice)
+            bundle.putString("highPrice", highPrice)
+            bundle.putString("lastPrice", lastPrice)
+            bundle.putString("volume", volume)
+            bundle.putString("bidPrice", bidPrice)
+            bundle.putString("askPrice", askPrice)
+
+
+            fragment.arguments = bundle
+            supportFragmentManager.beginTransaction()
+                .replace(layout_container.id, fragment)
+                .addToBackStack(DetailedCryptoFragment::class.java.simpleName)
+                .commit()
+        }
     }
 
 

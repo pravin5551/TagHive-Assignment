@@ -17,7 +17,7 @@ class RepositoryImpl constructor(
         observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    override fun getListOfCryptos(): Observable<CryptoDataClassItem> {
+    override fun getListOfCryptos(): Observable<CryptoDataClass> {
         return subscribeOnIoThread(api.getCryptoList())
     }
 

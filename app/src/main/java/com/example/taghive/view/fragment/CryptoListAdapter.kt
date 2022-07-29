@@ -35,6 +35,21 @@ class CryptoListAdapter(var dataList: List<CryptoDataClassItem>, var listner: It
 
         fun bind(data: CryptoDataClassItem, listner: ItemClickListener) {
             dataBinding.txtCryptoSymbol.text = data.symbol
+            dataBinding.cryptoCard.setOnClickListener {
+                listner.onCryptoListClicked(
+                    name = data.symbol.toString(),
+                    baseAsset = data.baseAsset.toString(),
+                    quoteAsset = data.quoteAsset.toString(),
+                    openPrice = data.openPrice.toString(),
+                    lowPrice = data.lowPrice.toString(),
+                    highPrice = data.highPrice.toString(),
+                    lastPrice = data.lastPrice.toString(),
+                    volume = data.volume.toString(),
+                    bidPrice = data.bidPrice.toString(),
+                    askPrice = data.askPrice.toString(),
+
+                    )
+            }
         }
 
     }
